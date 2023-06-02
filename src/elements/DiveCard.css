@@ -1,0 +1,9 @@
+.dive-card {
+    border: 1px black solid;
+    width: 30%;
+    margin: 30px;
+}
+
+.dive-img {
+    width: 100%;
+}

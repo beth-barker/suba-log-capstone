@@ -1,0 +1,42 @@
+.header {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: antiquewhite;
+    font-size: 20px;
+    border: 2px black solid;
+    height: fit-content;
+}
+
+.nav {
+    width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 20px;
+}
+
+button {
+    background-color: black;
+    color: antiquewhite;
+    border: none;
+    font-size: 20px;
+
+}
+
+button:hover {
+    color: blue;
+}
+
+.dive-logo {
+    width: 10%;
+    background-color: black;
+    margin-right: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: none;
+}
