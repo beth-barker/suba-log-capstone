@@ -69,6 +69,10 @@ module.exports = {
         } else {
             res.status(400).send('No user found')
         }
+    },
+    logout: (req, res) => {
+        req.session.destroy()
+        res.sendStatus(200)
     }
 
 }

@@ -9,8 +9,6 @@ const Auth = () => {
    const [register, setRegister] = useState(true)
    const authCtx = useContext(AuthContext)
 
-   console.log(authCtx)
-
    const body = {
         username: username,
         password: password

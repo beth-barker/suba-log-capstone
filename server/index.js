@@ -19,7 +19,7 @@ Country.hasMany(Dive)
 Dive.belongsTo(Country)
 
 //Controller imports
-const {register, login, checkUser} = require('./controllers/authCont')
+const {register, login, checkUser, logout} = require('./controllers/authCont')
 
 const app = express()
 
@@ -40,6 +40,7 @@ app.use(session({
 app.post('/api/register', register)
 app.post('/api/login', login)
 app.get('/api/user', checkUser)
+app.post('/api/logout', logout)
 
 sequelize.sync()
 // .then(() => seedDatabase())

@@ -1,6 +1,8 @@
 import {useState, useEffect, createContext} from 'react'
 import axios from 'axios'
 
+
+
 const AuthContext = createContext({
     userId: null,
     login: () => {},
@@ -10,12 +12,15 @@ const AuthContext = createContext({
 export const AuthContextProvider = props => {
     const [userId, setUserId] = useState(null)
 
+
     const login = (userId) => {
         setUserId(userId)
     }
 
     const logout = () => {
-
+        axios.post('/api/logout')
+        .then(setUserId(null))
+        .catch(err => console.log(err))
     }
 
     const contextValue = {
