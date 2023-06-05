@@ -11,7 +11,7 @@ module.exports = {
         },
         diveSite: DataTypes.STRING,
         date: DataTypes.DATEONLY,
-        durtaion: DataTypes.INTEGER,
+        duration: DataTypes.INTEGER,
         maxDepth: DataTypes.INTEGER,
         visibility: DataTypes.INTEGER,
         img: DataTypes.STRING,
