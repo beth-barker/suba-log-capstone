@@ -30,7 +30,7 @@ function AddDive( ) {
         axios.post('/api/dives', values)
         .then((res) => {
             console.log(res.data)
-            //navigate('/')
+            navigate('/')
         }).catch((err) => {
             console.log(err)
         })

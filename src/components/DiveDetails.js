@@ -19,18 +19,20 @@ function DiveDetails() {
     useEffect(() => {
         getId()
     }, [])
-
+    console.log(dive)
     return (
+        <>
         <div className='dive-card'>
         <img className="dive-img" src={dive.img} alt="whaleshark" />
         <h2>Dive Site: {dive.diveSite}</h2>
-        <h3>{dive.city}, {dive.countryId}</h3>
+        <h3>{dive.city}, {dive.country?.name}</h3>
         <h3>Date: {dive.date}</h3>
         <h3>Duration: {dive.duration} minutes</h3>
         <h3>Max Depth: {dive.depth} meters</h3>
         <h3>Visibility: {dive.visibility} meters</h3>
         <h3>Notes: {dive.notes}</h3>
     </div>
+    </>
     );
 }
 

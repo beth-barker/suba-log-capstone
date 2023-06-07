@@ -4,13 +4,14 @@ const {Country} = require('../models/country')
 
 module.exports = {
     getDives: async (req, res) => {
-        const {userId} = req.params
+        const {id} = req.params
         try {
             const dives = await Dive.findAll({
-                where: userId,
+                where: {userId: id},
                 include: [{
                     model: Country
-                }] })
+                }]
+            })
             res.status(200).send(dives)
         } catch (err) {
             console.log(err)
@@ -25,8 +26,7 @@ module.exports = {
             const details = await Dive.findOne({
                 where: {id: id},
                 include: [{
-                    model: Country,
-                    attributes: ['name']
+                    model: Country
                 }]
             })
             res.status(200).send(details)
@@ -65,6 +65,23 @@ module.exports = {
         }
         catch(err) {
             console.log(err)
+            res.sendStatus(400)
+        }
+    },
+
+    filterCountry: async (req, res) => {
+        const {id} = req.params
+        try {
+            const dives = await Dive.findAll({
+                where: {userId: id},
+                include: [{
+                    model: Country
+                }]
+            })
+            res.status(200).send(dives)
+        } catch (err) {
+            console.log(err)
+            console.log('filter not working')
             res.sendStatus(400)
         }
     }

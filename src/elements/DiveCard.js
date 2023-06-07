@@ -9,6 +9,7 @@ function DiveCard() {
     const {userId} = useContext(AuthContext);
 
     const [dives, setDives] = useState([]);
+    const [search, setSearch] = useState('');
 
 
 
@@ -23,25 +24,35 @@ function DiveCard() {
     }, [])
 
     console.log("HI", dives)
-    const mappedDives = dives.map(dive => {
+    console.log("SEARCH", search)
+    const mappedDives = dives.filter((dive, index) => {
+        let countryName = dive.country.name.toLowerCase();
+        let searchParams = search.toLowerCase();
+        return countryName.includes(searchParams)
+    }).map(dive => {
         return (
-            <div key={dive.id} className='dive-card'>
+            <div key={dive.id} className='dive-card' onClick={() => {navigate(`/dives/${dive.id}`)}}>
                 <img className="dive-img" src={dive.img} alt="whaleshark" />
-                <h2>Dive Site: {dive.diveSite}</h2>
+                <h2>{dive.diveSite}</h2>
                 <h3>{dive.city}, {dive.country.name}</h3>
-                <h3>Date: {dive.date}</h3>
-                <button onClick={() => {navigate(`/dives/${dive.id}`)}}>More Dive Details</button>
+                <h3>{dive.date}</h3>
             </div>
         );
     })
 
-    return mappedDives.length >=1 ? (
+    return (
         <main>
-            {mappedDives}
-        </main>
-    ) : (
-        <main>
-            <h1>You haven't logged any dives yet!</h1>
+            <span>
+                <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Filter Dive by Country"
+                />
+            </span>
+            <div className='dive-display'>
+                {mappedDives ? mappedDives : <h2>No Dives Logged</h2>}
+            </div>
         </main>
     )
 }

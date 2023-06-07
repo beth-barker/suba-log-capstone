@@ -20,7 +20,7 @@ Dive.belongsTo(Country)
 
 //Controller imports
 const {register, login, checkUser, logout} = require('./controllers/authCont')
-const {addDive, getAllCountries, getDives, getDetails} = require('./controllers/divesCont')
+const {addDive, getAllCountries, getDives, getDetails, filterCountry} = require('./controllers/divesCont')
 
 const app = express()
 
@@ -47,9 +47,10 @@ app.post('/api/logout', logout)
 app.get('/api/countries', getAllCountries)
 app.get('/api/userDives/:id', getDives)
 app.get('/api/details/:id', getDetails)
+app.get('/api/filter/:id', filterCountry)
 
 //Post endpoints
-app.post('/api/dives', checkUser, addDive)
+app.post('/api/dives', addDive)
 
 sequelize.sync()
 //.then(() => seedDatabase())
