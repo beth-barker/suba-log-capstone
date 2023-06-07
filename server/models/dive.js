@@ -15,6 +15,7 @@ module.exports = {
         maxDepth: DataTypes.INTEGER,
         visibility: DataTypes.INTEGER,
         img: DataTypes.STRING,
-        notes: DataTypes.TEXT
+        notes: DataTypes.TEXT,
+        city: DataTypes.STRING
     })
 }

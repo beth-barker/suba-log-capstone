@@ -18,8 +18,8 @@ function App() {
       <Routes>
       <Route path='/' element={<DiveLog/>}/>
       <Route path="/auth" element={(!userId ? <Auth/> : <Navigate to='/'/>)}/>
-      <Route path="addDive" element={(userId ? <AddDive/> : <Navigate to='/auth'/>)}/>
-      <Route path="dives/:id" element={<DiveDetails/>}/>
+      <Route path="/addDive" element={(userId ? <AddDive/> : <Navigate to='/auth'/>)}/>
+      <Route path="/dives/:id" element={<DiveDetails/>}/>
       </Routes>
     </div>
   );

@@ -1,15 +1,49 @@
-import React from 'react';
-import './DiveCard.css'
+import {useEffect, useContext, useCallback, useState} from 'react';
+import './DiveCard.css';
+import axios from 'axios';
+import AuthContext from '../store/authContext';
+import { useNavigate } from 'react-router-dom';
 
-function DiveCard(props) {
-    return (
-        <div className='dive-card'>
-            <img className="dive-img" src="https://www.blackturtledive.com/wp-content/uploads/2021/01/blackturtledive.com-sail-rock-dive-site-koh-tao-marine-life-whaleshark.jpg" alt="whaleshark" />
-            <h2>Dive Site: Sail Rock</h2>
-            <h3>Koh Tao, Thailand</h3>
-            <h3>Date: 4/3/21</h3>
-        </div>
-    );
+function DiveCard() {
+    const navigate = useNavigate();
+    const {userId} = useContext(AuthContext);
+
+    const [dives, setDives] = useState([]);
+
+
+
+    const getUserPosts = useCallback(() => {
+        axios.get(`/api/userDives/${userId}`)
+        .then(res => {setDives(res.data)})
+        .catch(err => console.log(err))
+    })
+    
+    useEffect (() => {
+        getUserPosts()
+    }, [])
+
+    console.log("HI", dives)
+    const mappedDives = dives.map(dive => {
+        return (
+            <div key={dive.id} className='dive-card'>
+                <img className="dive-img" src={dive.img} alt="whaleshark" />
+                <h2>Dive Site: {dive.diveSite}</h2>
+                <h3>{dive.city}, {dive.country.name}</h3>
+                <h3>Date: {dive.date}</h3>
+                <button onClick={() => {navigate(`/dives/${dive.id}`)}}>More Dive Details</button>
+            </div>
+        );
+    })
+
+    return mappedDives.length >=1 ? (
+        <main>
+            {mappedDives}
+        </main>
+    ) : (
+        <main>
+            <h1>You haven't logged any dives yet!</h1>
+        </main>
+    )
 }
 
 export default DiveCard;

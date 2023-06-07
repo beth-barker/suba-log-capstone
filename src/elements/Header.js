@@ -19,7 +19,7 @@ const Header = () => {
         </div>
         <nav className='nav'>
             {/* <NavLink to='/'>Landing</NavLink> */}
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/">Dive Log</NavLink>
             <NavLink to="/addDive">Add Dive</NavLink>
             <button onClick={()=> {authCtx.logout()
             navigate('/auth')}

@@ -20,7 +20,7 @@ Dive.belongsTo(Country)
 
 //Controller imports
 const {register, login, checkUser, logout} = require('./controllers/authCont')
-const {addDive} = require('./controllers/divesCont')
+const {addDive, getAllCountries, getDives, getDetails} = require('./controllers/divesCont')
 
 const app = express()
 
@@ -44,12 +44,15 @@ app.get('/api/user', checkUser)
 app.post('/api/logout', logout)
 
 //Get endpoints
+app.get('/api/countries', getAllCountries)
+app.get('/api/userDives/:id', getDives)
+app.get('/api/details/:id', getDetails)
 
 //Post endpoints
-app.post('/dives', addDive)
+app.post('/api/dives', checkUser, addDive)
 
 sequelize.sync()
-// .then(() => seedDatabase())
+//.then(() => seedDatabase())
 .then(() => {
     app.listen(SERVER_PORT, console.log(`Take us to port ${SERVER_PORT}`))
 }).catch(err => console.log(err))

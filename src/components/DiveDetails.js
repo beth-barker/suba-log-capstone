@@ -1,12 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function DiveDetails() {
+    const {id} = useParams();
+
+    const [dive, setDive] = useState({});
+
+    const getId = (() => {
+        axios.get(`/api/details/${id}`)
+        .then((res) => {
+            setDive(res.data);
+            console.log(res.data);
+        }).catch(err => console.log(err))
+    })
+
+
+    useEffect(() => {
+        getId()
+    }, [])
+
     return (
         <div className='dive-card'>
-        <img className="dive-img" src="https://www.blackturtledive.com/wp-content/uploads/2021/01/blackturtledive.com-sail-rock-dive-site-koh-tao-marine-life-whaleshark.jpg" alt="whaleshark" />
-        <h2>Dive Site: Sail Rock</h2>
-        <h3>Koh Tao, Thailand</h3>
-        <h3>Date: 4/3/21</h3>
+        <img className="dive-img" src={dive.img} alt="whaleshark" />
+        <h2>Dive Site: {dive.diveSite}</h2>
+        <h3>{dive.city}, {dive.countryId}</h3>
+        <h3>Date: {dive.date}</h3>
+        <h3>Duration: {dive.duration} minutes</h3>
+        <h3>Max Depth: {dive.depth} meters</h3>
+        <h3>Visibility: {dive.visibility} meters</h3>
+        <h3>Notes: {dive.notes}</h3>
     </div>
     );
 }
