@@ -52,7 +52,7 @@ function AddDive( ) {
         <div>
             <h1>Add a new dive!</h1>
 
-            <Formik initialValues={initialValues} onSubmit={onSubmit}>
+            <Formik initialValues={initialValues} onSubmit={onSubmit} className=''>
                 {({values, handleSubmit, handleChange}) => (
                     <form className='dive-form' onSubmit={handleSubmit}>
                     <input

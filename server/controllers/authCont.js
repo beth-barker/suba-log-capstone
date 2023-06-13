@@ -10,6 +10,7 @@ module.exports = {
             let foundUser = await User.findOne({where: {username}})
             console.log(foundUser)
             if(foundUser) {
+                alert('That username is already taken!')
                 res.status(400).send("That username is already taken!")
             } else {
                 const salt = bcrypt.genSaltSync(10)

@@ -1,39 +1,46 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+//import './DiveDetails.css'
 
 function DiveDetails() {
-    const {id} = useParams();
+  const { id } = useParams();
 
-    const [dive, setDive] = useState({});
+  const [dive, setDive] = useState({});
 
-    const getId = (() => {
-        axios.get(`/api/details/${id}`)
-        .then((res) => {
-            setDive(res.data);
-            console.log(res.data);
-        }).catch(err => console.log(err))
-    })
+  const getId = () => {
+    axios
+      .get(`/api/details/${id}`)
+      .then((res) => {
+        setDive(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
+  useEffect(() => {
+    getId();
+  }, []);
 
-    useEffect(() => {
-        getId()
-    }, [])
-    console.log(dive)
-    return (
-        <>
-        <div className='dive-card'>
-        <img className="dive-img" src={dive.img} alt="whaleshark" />
-        <h2>Dive Site: {dive.diveSite}</h2>
-        <h3>{dive.city}, {dive.country?.name}</h3>
-        <h3>Date: {dive.date}</h3>
-        <h3>Duration: {dive.duration} minutes</h3>
-        <h3>Max Depth: {dive.depth} meters</h3>
-        <h3>Visibility: {dive.visibility} meters</h3>
-        <h3>Notes: {dive.notes}</h3>
+  console.log(dive);
+  return (
+    <div className='flex m-10 items-center h-[70vh] border' >
+      <div className="flex flex-col items-center justify-evenly w-7/12 border">
+        <img className="w-max h-4/5 rounded-3xl" src={dive.img} alt="whaleshark" />
+      </div>
+      <div className="w-6/12 flex flex-col items-center justify-center border m-10 p-5">
+        <h2 className="font-bold text-2xl underline mb-5">{dive.diveSite}</h2>
+        <h3 className="mb-1">
+          {dive.city}, {dive.country?.name}
+        </h3>
+        <h3 className="mb-1">Date: {dive.date}</h3>
+        <h3 className="mb-1">Duration: {dive.duration} minutes</h3>
+        <h3 className="mb-1">Max Depth: {dive.depth} meters</h3>
+        <h3 className="mb-1">Visibility: {dive.visibility} meters</h3>
+        <h3 className="mt-5 mb-5">Notes: {dive.notes}</h3>
+      </div>
     </div>
-    </>
-    );
+  );
 }
 
 export default DiveDetails;

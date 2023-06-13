@@ -1,5 +1,5 @@
-import {useEffect, useContext, useCallback, useState} from 'react';
-import './DiveCard.css';
+import {useEffect, useContext, useState} from 'react';
+//import './DiveCard.css';
 import axios from 'axios';
 import AuthContext from '../store/authContext';
 import { useNavigate } from 'react-router-dom';
@@ -13,11 +13,11 @@ function DiveCard() {
 
 
 
-    const getUserPosts = useCallback(() => {
+    const getUserPosts = () => {
         axios.get(`/api/userDives/${userId}`)
         .then(res => {setDives(res.data)})
         .catch(err => console.log(err))
-    })
+    }
     
     useEffect (() => {
         getUserPosts()
@@ -31,26 +31,27 @@ function DiveCard() {
         return countryName.includes(searchParams)
     }).map(dive => {
         return (
-            <div key={dive.id} className='dive-card' onClick={() => {navigate(`/dives/${dive.id}`)}}>
-                <img className="dive-img" src={dive.img} alt="whaleshark" />
-                <h2>{dive.diveSite}</h2>
-                <h3>{dive.city}, {dive.country.name}</h3>
-                <h3>{dive.date}</h3>
+            <div key={dive.id} className='flex flex-col items-center border-2 border-gray-300 w-3/12 rounded-lg' onClick={() => {navigate(`/dives/${dive.id}`)}}>
+                <img className='h-4/6 w-full' src={dive.img} alt="whaleshark" />
+                    <h2 className='mt-5 font-bold text-lg'>{dive.diveSite}</h2>
+                    <h3 className='mt-5'>{dive.city}, {dive.country.name}</h3>
+                    <h3 className='mt-5 mb-5'>{dive.date}</h3>
             </div>
         );
     })
 
     return (
         <main>
-            <span>
+            <span className='flex justify-end m-8 mx-28'>
                 <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Filter Dive by Country"
+                placeholder=" Filter Dive by Country"
+                className='border-b-2'
                 />
             </span>
-            <div className='dive-display'>
+            <div className='flex flex-wrap justify-evenly mt-10'>
                 {mappedDives ? mappedDives : <h2>No Dives Logged</h2>}
             </div>
         </main>

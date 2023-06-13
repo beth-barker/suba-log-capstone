@@ -12,16 +12,16 @@ const Header = () => {
     console.log(authCtx)
 
     return (
-        authCtx.userId ? (<div className='header'>
+        authCtx.userId ? (<div className='dive-log'>
         <div className='logo'>
             <img className='dive-logo' src="https://static.vecteezy.com/system/resources/previews/005/728/530/original/diving-mask-snorkel-swimwear-snorkelling-solid-icon-illustration-logo-template-suitable-for-many-purposes-free-vector.jpg" alt="" />
             <p>Dive Log</p>
         </div>
-        <nav className='nav'>
+        <nav>
             {/* <NavLink to='/'>Landing</NavLink> */}
             <NavLink to="/">Dive Log</NavLink>
             <NavLink to="/addDive">Add Dive</NavLink>
-            <button onClick={()=> {authCtx.logout()
+            <button className='fo' onClick={()=> {authCtx.logout()
             navigate('/auth')}
         }>Logout</button>
         </nav>
