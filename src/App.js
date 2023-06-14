@@ -13,7 +13,7 @@ function App() {
   const {userId} = useContext(AuthContext);
 
   return (
-    <div className="App">
+    <div className="App font-body">
       <Header/>
       <Routes>
       <Route path='/' element={(userId ? <DiveCard/> : <Navigate to='/auth'/>)}/>
