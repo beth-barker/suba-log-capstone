@@ -1,5 +1,4 @@
 import { useEffect, useContext, useState } from "react";
-//import './DiveCard.css';
 import axios from "axios";
 import AuthContext from "../store/authContext";
 import { useNavigate } from "react-router-dom";
@@ -85,7 +84,7 @@ function DiveCard() {
           className="border-b-2 w-2/12"
         />
       </span>
-      <div className="flex flex-wrap justify-evenly mt-10">
+      <div className="flex flex-wrap justify-evenly mt-10 ">
         {mappedDives ? mappedDives : <h2>No Dives Logged</h2>}
       </div>
     </main>
